@@ -138,7 +138,11 @@ SET category = CASE WHEN category = 'nan' THEN 'Unknown' ELSE category END,
 
 ## 2. Analysis and Visualization in Tableau
 
-### 1. Setting Up Dynamic Visualizations
+After preparing the data, I connected youtube_clean table to Tableau Public via Text File format.
+
+For better visualization and dynamics I did the next steps:
+
+***1. Setting Up Dynamic Visualizations***
 
 To allow for dynamic visualizations in Tableau, I created a parameter to choose the metric (such as Subscribers, Views, Uploads, or Earnings) and then used it to create a calculated field:
 
@@ -151,7 +155,7 @@ CASE [Selected Metric]
 END
 ```
 
-### 2. Scale Label
+***2. Scale Label***
 
 I created a calculated field to adjust the scale labels for better readability (e.g., converting millions to 'M' or billions to 'B'):
 
@@ -163,6 +167,32 @@ CASE [Selected Metric]
     WHEN 'Earnings' THEN STR(ROUND(([Total Parameter] / 1000000), 2)) + 'M'
 END
 ```
+### Dashboard 1: Overview
+
+This interactive dashboard focuses on YouTube channel performance across different categories, channel types, and countries, allowing users to explore data dynamically based on the selected parameter (subscribers, views, uploads, or earnings).
+
+Sheets:
+- **YouTube Metrics Overview** – A summary of key metrics, including total subscribers, views, uploads, and estimated earnings.
+- **Top YouTube Categories** – A horizontal bar chart showcasing the most popular content categories based on selected metrics.
+- **Top YouTube Channel Types** – A horizontal bar chart displaying the channels with the highest-performing.
+- **Top Countries** – A heatmap displaying the countries with the highest-performing channels.
+- **YouTube Channel Creation Trends** – A vertical bar chart showing the number of channels created each year.
+
+![image](Overview.png)
+
+***Dashboard 2: Statistic Analysis***
+
+This interactive dashboard provides a detailed statistical analysis, focusing on the distribution and correlation of key metrics such as Subscribers, Views, Uploads, and Earnings. The dashboard allows users to explore these relationships dynamically, adjusting the visualizations based on the selected metric.
+
+Sheets:
+- **Box Plot for Channel Distribution** – A box plot that displays the distribution of channels based on the selected metric, helping identify trends, outliers, and variability in channel performance.
+- **Scatter Plots for Correlation Analysis** – Four scatter plots are used to visualize the correlation between key metrics. Each scatter plot shows how different metrics are correlated, allowing for a deeper understanding of the factors that influence YouTube channel performance:
+    - Subscribers vs. Selected metric
+    - Views vs. Selected metric
+    - Uploads vs. Selected metric
+    - Avg. Yearly Earnings vs. Selected metric
+
+![image](Statistic.png)
 
 ## **Key Takeaways from the Project 🚀:**
 - Cleaned and optimized YouTube data using PostgreSQL, handling missing values and adjusting data types for consistency.
